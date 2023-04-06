@@ -1,0 +1,32 @@
+{
+  "slides": [
+    {
+      "type": "slide",
+      "start_animation": 0,
+      "end_animation": 1,
+      "number": 1,
+      "terminated": false
+    },
+    {
+      "type": "slide",
+      "start_animation": 1,
+      "end_animation": 2,
+      "number": 2,
+      "terminated": false
+    },
+    {
+      "type": "slide",
+      "start_animation": 2,
+      "end_animation": 3,
+      "number": 3,
+      "terminated": false
+    }
+  ],
+  "files": [
+    "./slides\\files\\deineMudda\\450974505_3138954399_223132457.mp4",
+    "./slides\\files\\deineMudda\\34786186_1967133371_874880367.mp4",
+    "./slides\\files\\deineMudda\\34786186_1887766023_874880367.mp4",
+    "./slides\\files\\deineMudda\\34786186_304677743_874880367.mp4",
+    "./slides\\files\\deineMudda\\34786186_329969645_631829896.mp4"
+  ]
+}

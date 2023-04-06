@@ -1,0 +1,26 @@
+{
+  "slides": [
+    {
+      "type": "slide",
+      "start_animation": 0,
+      "end_animation": 2,
+      "number": 1,
+      "terminated": false
+    },
+    {
+      "type": "slide",
+      "start_animation": 2,
+      "end_animation": 6,
+      "number": 2,
+      "terminated": false
+    }
+  ],
+  "files": [
+    "./slides\\files\\Partial\\450974505_2919893798_223132457.mp4",
+    "./slides\\files\\Partial\\34786186_582606490_682935992.mp4",
+    "./slides\\files\\Partial\\34786186_1240155656_3525767324.mp4",
+    "./slides\\files\\Partial\\34786186_1076466279_631829896.mp4",
+    "./slides\\files\\Partial\\34786186_242563550_4174018169.mp4",
+    "./slides\\files\\Partial\\34786186_3537752921_2032010897.mp4"
+  ]
+}

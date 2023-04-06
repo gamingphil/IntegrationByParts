@@ -1,0 +1,5 @@
+# This file is used internally by FFMPEG.
+file 'file:F:/School/Jahrgangsstufe/M51 Mathe/project/media/videos/scene/1080p60/partial_movie_files/CreateGraph/450974505_406823843_223132457.mp4'
+file 'file:F:/School/Jahrgangsstufe/M51 Mathe/project/media/videos/scene/1080p60/partial_movie_files/CreateGraph/34786186_1076466279_666591712.mp4'
+file 'file:F:/School/Jahrgangsstufe/M51 Mathe/project/media/videos/scene/1080p60/partial_movie_files/CreateGraph/34786186_612516357_890669374.mp4'
+file 'file:F:/School/Jahrgangsstufe/M51 Mathe/project/media/videos/scene/1080p60/partial_movie_files/CreateGraph/34786186_1076466279_2491089310.mp4'
