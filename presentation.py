@@ -40,28 +40,34 @@ class PartielleIntegration(Scene):
             topicstitle.scale(0.7).to_corner(UP + LEFT)
 
             topic1 = Text(
-                "1. Die „Produktregel“ des Integrals",
+                "1. Bestimmtes und unbestimmtes Integral",
+                font="Roboto",
+                font_size=45
+            )
+            topic2 = Text(
+                "2. Die „Produktregel“ des Integrals",
                 font="Roboto",
                 font_size=45 
             )
-            topic2 = Text(
-                "2. Phoenix-Integration",
+            topic3 = Text(
+                "3. Phoenix-Integration",
                 font="Roboto" ,
                 font_size=45
             )
-            topic3 = Text(
-                "3. DI-Methode",
+            topic4 = Text(
+                "4. DI-Methode",
                 font="Roboto",
                 font_size=45
             )
 
-            topics = VGroup(topic1, topic2, topic3).set_x(0).arrange(DOWN, buff=0.4, aligned_edge=LEFT)
+            topics = VGroup(topic1, topic2, topic3, topic4).set_x(0).arrange(DOWN, buff=0.4, aligned_edge=LEFT)
             topics.to_corner(LEFT)
 
             self.play(Write(topicstitle))
             self.play(Write(topic1))
             self.play(Write(topic2))
             self.play(Write(topic3))
+            self.play(Write(topic4))
             self.wait(1)
             self.play(Unwrite(topics))
             self.play(Unwrite(topicstitle))
@@ -250,15 +256,11 @@ class PartielleIntegration(Scene):
             arrow1 = Arrow(max_tip_length_to_length_ratio=0.1).scale(0.4)
             definiteText = Text("bestimmtes Integral", font="Roboto", font_size=32)
             definiteTextGroup = VGroup(arrow1, definiteText).set_x(0).arrange(RIGHT,buff=0.1)
-            
-
-
 
             indefinite = MathTex(r"\int f(x) \, dx =", r"F(x)", "+c")
             arrow2 = Arrow(max_tip_length_to_length_ratio=0.1).scale(0.4)
             indefiniteText = Text("unbestimmtes Integral", font="Roboto", font_size=32)
             indefiniteTextGroup = VGroup(arrow2, indefiniteText).set_x(0).arrange(RIGHT,buff=0.1)
-
             
             slide = VGroup(definite, definiteTextGroup, indefinite, indefiniteTextGroup).set_x(0).arrange(DOWN, buff=0.4, aligned_edge=LEFT).to_corner(LEFT)
 
@@ -285,7 +287,7 @@ class PartielleIntegration(Scene):
             self.play(Unwrite(title))
             self.wait(1)
 
-        # titlepage()
-        # topics()
-        # integralproductrule()
+        titlepage()
+        topics()
         indefiniteIntegral()
+        integralproductrule()
