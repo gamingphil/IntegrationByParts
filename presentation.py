@@ -150,7 +150,7 @@ class PartielleIntegration(Scene):
 
             example1_1 = MathTex(r"\int", r"x",r"\cos(x)", r"\, dx", font_size = 40)
             example1_2 = MathTex(r"=", r"x \cdot \sin(x)", r"-\int \sin(x) \cdot 1 \, dx", font_size = 40)
-            example1_3 = MathTex(r"= x \sin(x) + \cos(x)", font_size = 40)
+            example1_3 = MathTex(r"= x \sin(x) + \cos(x) + c", font_size = 40)
 
             example1 = VGroup(example1_1, example1_2, example1_3).set_x(0).arrange(DOWN, buff=0.5, aligned_edge=LEFT).to_corner(DOWN + LEFT).shift(UP*0.1)
 
@@ -235,6 +235,57 @@ class PartielleIntegration(Scene):
             self.wait(1)
             self.play(Write(example1_3))
 
-        titlepage()
-        topics()
-        integralproductrule()
+
+        def indefiniteIntegral():
+            title = Text(
+                "Bestimmtes und unbestimmtes Integral",
+                font="Roboto Medium", 
+                font_size=55
+            )
+
+            self.play(Write(title))
+            self.play(title.animate.scale(0.7).to_corner(UP + LEFT))
+
+            definite = MathTex(r"\int_a^b f(x) \, dx =", r"\left[F(x)\right]_a^b=", r"F(b) - F(a)")
+            arrow1 = Arrow(max_tip_length_to_length_ratio=0.1).scale(0.4)
+            definiteText = Text("bestimmtes Integral", font="Roboto", font_size=32)
+            definiteTextGroup = VGroup(arrow1, definiteText).set_x(0).arrange(RIGHT,buff=0.1)
+            
+
+
+
+            indefinite = MathTex(r"\int f(x) \, dx =", r"F(x)", "+c")
+            arrow2 = Arrow(max_tip_length_to_length_ratio=0.1).scale(0.4)
+            indefiniteText = Text("unbestimmtes Integral", font="Roboto", font_size=32)
+            indefiniteTextGroup = VGroup(arrow2, indefiniteText).set_x(0).arrange(RIGHT,buff=0.1)
+
+            
+            slide = VGroup(definite, definiteTextGroup, indefinite, indefiniteTextGroup).set_x(0).arrange(DOWN, buff=0.4, aligned_edge=LEFT).to_corner(LEFT)
+
+            indefinite.shift(DOWN*0.5)
+            indefiniteTextGroup.shift(DOWN*0.5)
+
+            self.play(Write(definite[0]))
+            self.wait(1)
+            self.play(Write(definite[1]))
+            self.wait(1)
+            self.play(Write(definite[2]))
+            self.wait(1)
+            self.play(Write(definiteTextGroup))
+            self.wait(1)
+            self.play(Write(indefinite[0]))
+            self.wait(1)
+            self.play(Write(indefinite[1]))
+            self.wait(1)
+            self.play(Write(indefinite[2]))
+            self.wait(1)
+            self.play(Write(indefiniteTextGroup))
+            self.wait(5)
+            self.play(Unwrite(slide))
+            self.play(Unwrite(title))
+            self.wait(1)
+
+        # titlepage()
+        # topics()
+        # integralproductrule()
+        indefiniteIntegral()
