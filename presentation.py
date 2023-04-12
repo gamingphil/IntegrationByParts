@@ -357,8 +357,56 @@ class PartielleIntegration(Scene):
             self.wait(1)
 
             
+        def examples():
+            title = Text(
+                "Beispiele",
+                font="Roboto Medium", 
+                font_size=55
+            )
+
+            self.play(Write(title))
+            self.play(title.animate.scale(0.7).to_corner(UP + LEFT))
+
+            ex1_1 = MathTex(r"\int x^4 \ln(x) \, dx")
+            ex1_2 = MathTex(r"= \frac{1}{5}x^5 \ln(x)", r"- \int \frac{1}{5}x^5 \cdot \frac{1}{x} \, dx")
+            ex1_3 = MathTex(r"= \frac{1}{5}x^2 \ln(x) - \int \frac{1}{5}x^4 \, dx")
+            ex1_4 = MathTex(r"= \frac{1}{5}x^2 \ln(x) - \frac{1}{25}x^5 + c")
+
+            ex1 = VGroup(ex1_1, ex1_2, ex1_3, ex1_4).arrange(DOWN).set_x(0).arrange(DOWN, buff=0.4, aligned_edge=LEFT).to_corner(LEFT).shift(DOWN*0.3)
+
+            ex1part1 = MathTex(r"u=", r"\ln(x)")
+            ex1part2 = MathTex(r"u'=", r"\frac{1}{x}")
+            ex1part3 = MathTex(r"v=", r"\frac{1}{5} x^5")
+            ex1part4 = MathTex(r"v'=", r"x^4")
+
+            ex1parts = VGroup(ex1part1, ex1part2, ex1part3, ex1part4)
+            ex1parts.arrange_in_grid(cols=2, buff=0.5, col_alignments="ll",col_widths=None).to_corner(RIGHT).shift(LEFT*0.5)
+
+
+            self.play(Write(ex1_1))
+            self.wait(2)
+            self.play(Write(VGroup(ex1part1[0], ex1part2[0], ex1part3[0], ex1part4[0])))
+            self.wait(1)
+            self.play(Write(ex1part1[1]))
+            self.wait(1)
+            self.play(Write(ex1part4[1]))
+            self.wait(1)
+            self.play(Write(ex1part2[1]))
+            self.wait(1)
+            self.play(Write(ex1part3[1]))
+            self.wait(1)
+            self.play(Write(ex1_2[0]))
+            self.wait(1)
+            self.play(Write(ex1_2[1]))
+            self.wait(1)
+            self.play(Write(ex1_3))
+            self.wait(1)
+            self.play(Write(ex1_4))
+            
+
 
         # titlepage()
-        topics()
+        # topics()
         # indefiniteIntegral()
         # integralproductrule()
+        examples()
