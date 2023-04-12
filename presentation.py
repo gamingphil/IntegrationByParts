@@ -69,8 +69,7 @@ class PartielleIntegration(Scene):
             self.play(Write(topic3))
             self.play(Write(topic4))
             self.wait(1)
-            self.play(Unwrite(topics))
-            self.play(Unwrite(topicstitle))
+            self.play(Unwrite(VGroup(topics, topicstitle)))
             self.wait(1)
 
 
@@ -119,7 +118,7 @@ class PartielleIntegration(Scene):
             derivation4_2.move_to(derivation4, aligned_edge=LEFT)
 
 
-            self.play(Unwrite(productrule1), Unwrite(productrule2))
+            self.play(Unwrite(VGroup(productrule1, productrule2)))
             self.play(Write(derivation1))
             self.add(derivation1copy)
             self.wait(1)
@@ -156,7 +155,7 @@ class PartielleIntegration(Scene):
 
             example1_1 = MathTex(r"\int", r"x",r"\cos(x)", r"\, dx", font_size = 40)
             example1_2 = MathTex(r"=", r"x \cdot \sin(x)", r"-\int \sin(x) \cdot 1 \, dx", font_size = 40)
-            example1_3 = MathTex(r"= x \sin(x) + \cos(x) + c", font_size = 40)
+            example1_3 = MathTex(r"= x \sin(x) + \cos(x)", r"+ c", font_size = 40)
 
             example1 = VGroup(example1_1, example1_2, example1_3).set_x(0).arrange(DOWN, buff=0.5, aligned_edge=LEFT).to_corner(DOWN + LEFT).shift(UP*0.1)
 
@@ -173,13 +172,9 @@ class PartielleIntegration(Scene):
             parts = VGroup(part1, part2, part3, part4)
             parts.arrange_in_grid(cols=2, buff=0.3, col_alignments="ll",col_widths=None).to_corner(RIGHT).shift(DOWN*1.5)
 
-            self.play(
-                Write(part1[0]),
-                Write(part2[0]),
-                Write(part3[0]),
-                Write(part4[0]),
-            )
+            self.play(Write(VGroup(part1[0], part2[0], part3[0], part4[0])))
 
+            
             ### ----> u and dv choice brackets <------ ###
 
             ubrace = Brace(example1_1[1],sharpness=2,buff=0.2).set_color(RED_C)
@@ -217,10 +212,8 @@ class PartielleIntegration(Scene):
             )
 
             self.wait(1)
-            self.play(
-                Write(part1[1]),
-                Write(part4[1]),
-            )
+            self.play(Write(part1[1]))
+            self.play(Write(part4[1]))
             self.wait(1)
             self.play(Write(part2[1]))
             self.wait(1)
@@ -239,7 +232,78 @@ class PartielleIntegration(Scene):
             self.play(Write(example1_2[2]))
 
             self.wait(1)
-            self.play(Write(example1_3))
+            self.play(Write(example1_3[0]))
+            self.wait(1)
+            self.play(Write(example1_3[1]))
+
+            ### wrong choice of u and dv
+
+            wpart1 = MathTex(r"u =", "\cos(x)")
+            wpart1[0][0:1].set_color(RED_C)
+            wpart2 = MathTex(r"u' =", r"-\sin(x)")
+            wpart3 = MathTex(r"v =", r"\frac{1}{2}x^2")
+            wpart4 = MathTex(r"v' =", r"x")
+            wpart4[0][0:2].set_color(GREEN_C)
+
+            wparts = VGroup(wpart1, wpart2, wpart3, wpart4)
+            wparts.arrange_in_grid(cols=2, buff=0.3, col_alignments="ll",col_widths=None).to_corner(RIGHT).shift(DOWN*1.5)
+
+            self.wait(4)
+            self.play(
+                Unwrite(VGroup(example1_2, example1_3, part1[1], part2[1], part3[1], part4[1])), 
+                Uncreate(framebox2), 
+                Transform(VGroup(cpart1[0], part2[0], part3[0], cpart4[0]), VGroup(wpart1[0], wpart2[0] ,wpart3[0], wpart4[0]))
+                )
+            self.wait(1)
+
+            self.play(
+                ubrace.animate.set_color(GREEN_C),
+                utext.animate.next_to(vbrace, DOWN),
+                vbrace.animate.set_color(RED_C),
+                vtext.animate.next_to(ubrace, DOWN*0.4),
+            )
+
+
+            self.wait(1)
+            self.play(Write(wpart1[1]))
+            self.play(Write(wpart4[1]))
+            self.wait(1)
+            self.play(Write(wpart2[1]))
+            self.wait(1)
+            self.play(Write(wpart3[1]))
+            self.wait(1)
+
+            wrongexample_2 = MathTex(r"= \frac{1}{2}x^2 \cos(x)", r"-", r"\int -\frac{1}{2}x^2 \sin(x) \, dx", font_size = 40)
+            wrongexample_2.to_corner(LEFT).shift(DOWN*2.5)
+
+            self.play(Write(wrongexample_2[0]))
+            self.wait(1)
+            self.play(Write(VGroup(wrongexample_2[1], wrongexample_2[2])))
+            self.wait(1)
+            self.play(wrongexample_2[2].animate.scale(1.1).set_color(YELLOW_C))
+            self.wait(3)
+
+
+            self.play(
+                Unwrite(VGroup(example1_1, vtext, utext, wrongexample_2, wpart1[1], cpart1[0], wpart2[1], part2[0], wpart3[1], part3[0], wpart4[1], cpart4[0])),
+                Unwrite(ubrace),
+                Unwrite(vbrace)
+            )
+
+
+            ### how to choose u and dv
+
+            udvchoice1 = Tex("$u$ und $v'$ müssen so gewählt werden,")
+            udvchoice1[0][0:1].set_color(RED_C)
+            udvchoice1[0][4:6].set_color(GREEN_C)
+            udvchoice2 = Tex("dass $u'v$ leicht zu integrieren ist.")
+
+            udvchoice = VGroup(udvchoice1, udvchoice2).arrange(DOWN)
+            udvchoice.shift(DOWN*1.5)
+
+            self.wait(1)
+            self.play(Write(udvchoice))
+            self.wait(1)
 
 
         def indefiniteIntegral():
@@ -254,12 +318,12 @@ class PartielleIntegration(Scene):
 
             definite = MathTex(r"\int_a^b f(x) \, dx =", r"\left[F(x)\right]_a^b=", r"F(b) - F(a)")
             arrow1 = Arrow(max_tip_length_to_length_ratio=0.1).scale(0.4)
-            definiteText = Text("bestimmtes Integral", font="Roboto", font_size=32)
+            definiteText = Tex("bestimmtes Integral")
             definiteTextGroup = VGroup(arrow1, definiteText).set_x(0).arrange(RIGHT,buff=0.1)
 
             indefinite = MathTex(r"\int f(x) \, dx =", r"F(x)", "+c")
             arrow2 = Arrow(max_tip_length_to_length_ratio=0.1).scale(0.4)
-            indefiniteText = Text("unbestimmtes Integral", font="Roboto", font_size=32)
+            indefiniteText = Tex("unbestimmtes Integral")
             indefiniteTextGroup = VGroup(arrow2, indefiniteText).set_x(0).arrange(RIGHT,buff=0.1)
             
             slide = VGroup(definite, definiteTextGroup, indefinite, indefiniteTextGroup).set_x(0).arrange(DOWN, buff=0.4, aligned_edge=LEFT).to_corner(LEFT)
@@ -283,11 +347,12 @@ class PartielleIntegration(Scene):
             self.wait(1)
             self.play(Write(indefiniteTextGroup))
             self.wait(5)
-            self.play(Unwrite(slide))
-            self.play(Unwrite(title))
+            self.play(Unwrite(VGroup(title, slide)))
             self.wait(1)
 
-        titlepage()
-        topics()
+            
+
+        # titlepage()
+        # topics()
         indefiniteIntegral()
-        integralproductrule()
+        # integralproductrule()
