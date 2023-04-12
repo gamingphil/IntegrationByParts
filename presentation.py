@@ -42,22 +42,22 @@ class PartielleIntegration(Scene):
             topic1 = Text(
                 "1. Bestimmtes und unbestimmtes Integral",
                 font="Roboto",
-                font_size=45
+                font_size=40
             )
             topic2 = Text(
                 "2. Die „Produktregel“ des Integrals",
                 font="Roboto",
-                font_size=45 
+                font_size=40 
             )
             topic3 = Text(
                 "3. Phoenix-Integration",
                 font="Roboto" ,
-                font_size=45
+                font_size=40
             )
             topic4 = Text(
                 "4. DI-Methode",
                 font="Roboto",
-                font_size=45
+                font_size=40
             )
 
             topics = VGroup(topic1, topic2, topic3, topic4).set_x(0).arrange(DOWN, buff=0.4, aligned_edge=LEFT)
@@ -69,14 +69,14 @@ class PartielleIntegration(Scene):
             self.play(Write(topic3))
             self.play(Write(topic4))
             self.wait(1)
-            self.play(Unwrite(VGroup(topics, topicstitle)))
+            self.play(Unwrite(VGroup(topicstitle, topics)))
             self.wait(1)
 
 
         def integralproductrule():
             ### Product Rule of the Integral ###
 
-            slide3title = Text(
+            title = Text(
                 "Die „Produktregel“ des Integrals",
                 font="Roboto Medium", 
                 font_size=55
@@ -86,12 +86,12 @@ class PartielleIntegration(Scene):
             productrule2 = MathTex(r"f'(x) = u'(x) \cdot v(x) + u(x) \cdot v'(x)", font_size = 60)
             productrule3 = MathTex(r"\int f(x)\; dx = \;?", font_size = 60)
 
-            slide3 = VGroup(productrule1, productrule2).set_x(0).arrange(DOWN, buff=1.2, aligned_edge=LEFT).to_corner(LEFT)
+            productrule = VGroup(productrule1, productrule2).set_x(0).arrange(DOWN, buff=1.2, aligned_edge=LEFT).to_corner(LEFT)
             productrule3.move_to(productrule2, aligned_edge=LEFT)
 
 
-            self.play(Write(slide3title))
-            self.play(slide3title.animate.scale(0.7).to_corner(UP + LEFT))
+            self.play(Write(title))
+            self.play(title.animate.scale(0.7).to_corner(UP + LEFT))
             self.play(Write(productrule1))
             self.play(Write(productrule2))
             self.wait(1)
@@ -153,16 +153,16 @@ class PartielleIntegration(Scene):
 
             dividerline.set_stroke(color=GREY, width=1)
 
-            example1_1 = MathTex(r"\int", r"x",r"\cos(x)", r"\, dx", font_size = 40)
-            example1_2 = MathTex(r"=", r"x \cdot \sin(x)", r"-\int \sin(x) \cdot 1 \, dx", font_size = 40)
-            example1_3 = MathTex(r"= x \sin(x) + \cos(x)", r"+ c", font_size = 40)
+            example_1 = MathTex(r"\int", r"x",r"\cos(x)", r"\, dx", font_size = 40)
+            example_2 = MathTex(r"=", r"x \cdot \sin(x)", r"-\int \sin(x) \cdot 1 \, dx", font_size = 40)
+            example_3 = MathTex(r"= x \sin(x) + \cos(x)", r"+ c", font_size = 40)
 
-            example1 = VGroup(example1_1, example1_2, example1_3).set_x(0).arrange(DOWN, buff=0.5, aligned_edge=LEFT).to_corner(DOWN + LEFT).shift(UP*0.1)
+            example = VGroup(example_1, example_2, example_3).set_x(0).arrange(DOWN, buff=0.5, aligned_edge=LEFT).to_corner(DOWN + LEFT).shift(UP*0.1)
 
 
             self.play(Create(dividerline))
-            self.play(Write(example1_1))
-            self.play(Write(example1_2[0]))
+            self.play(Write(example_1))
+            self.play(Write(example_2[0]))
 
             part1 = MathTex(r"u =", "x")
             part2 = MathTex(r"u' =", r"1")
@@ -177,12 +177,12 @@ class PartielleIntegration(Scene):
             
             ### ----> u and dv choice brackets <------ ###
 
-            ubrace = Brace(example1_1[1],sharpness=2,buff=0.2).set_color(RED_C)
+            ubrace = Brace(example_1[1],sharpness=2,buff=0.2).set_color(RED_C)
             utext = MathTex(r"u", font_size=40).next_to(ubrace, DOWN).set_color(RED_C)
 
             self.play(DrawBorderThenFill(ubrace), Write(utext))
 
-            vbrace = Brace(example1_1[2],sharpness=2,buff=0.1).set_color(GREEN_C)
+            vbrace = Brace(example_1[2],sharpness=2,buff=0.1).set_color(GREEN_C)
             vtext = MathTex(r"v'", font_size=40).next_to(vbrace, DOWN*0.4).set_color(GREEN_C)
 
             self.play(DrawBorderThenFill(vbrace), Write(vtext))
@@ -225,16 +225,16 @@ class PartielleIntegration(Scene):
 
             self.play(Create(framebox1))
             self.wait(1)
-            self.play(Write(example1_2[1]))
+            self.play(Write(example_2[1]))
             self.wait(1)
             self.play(ReplacementTransform(framebox1, framebox2))
             self.wait(1)
-            self.play(Write(example1_2[2]))
+            self.play(Write(example_2[2]))
 
             self.wait(1)
-            self.play(Write(example1_3[0]))
+            self.play(Write(example_3[0]))
             self.wait(1)
-            self.play(Write(example1_3[1]))
+            self.play(Write(example_3[1]))
 
             ### wrong choice of u and dv
 
@@ -250,7 +250,7 @@ class PartielleIntegration(Scene):
 
             self.wait(4)
             self.play(
-                Unwrite(VGroup(example1_2, example1_3, part1[1], part2[1], part3[1], part4[1])), 
+                Unwrite(VGroup(example_2, example_3, part1[1], part2[1], part3[1], part4[1])), 
                 Uncreate(framebox2), 
                 Transform(VGroup(cpart1[0], part2[0], part3[0], cpart4[0]), VGroup(wpart1[0], wpart2[0] ,wpart3[0], wpart4[0]))
                 )
@@ -285,9 +285,9 @@ class PartielleIntegration(Scene):
 
 
             self.play(
-                Unwrite(VGroup(example1_1, vtext, utext, wrongexample_2, wpart1[1], cpart1[0], wpart2[1], part2[0], wpart3[1], part3[0], wpart4[1], cpart4[0])),
-                Unwrite(ubrace),
-                Unwrite(vbrace)
+                Unwrite(VGroup(example_1, wrongexample_2, wpart1[1], cpart1[0], wpart2[1], part2[0], wpart3[1], part3[0], wpart4[1], cpart4[0])),
+                Unwrite(VGroup(ubrace, utext)),
+                Unwrite(VGroup(vbrace, vtext))
             )
 
 
@@ -303,6 +303,12 @@ class PartielleIntegration(Scene):
 
             self.wait(1)
             self.play(Write(udvchoice))
+            self.wait(5)
+
+            self.play(
+                Unwrite(VGroup(title, derivationcolored, udvchoice)),
+                Uncreate(dividerline, reverse=False)
+                )
             self.wait(1)
 
 
@@ -353,6 +359,6 @@ class PartielleIntegration(Scene):
             
 
         # titlepage()
-        # topics()
-        indefiniteIntegral()
+        topics()
+        # indefiniteIntegral()
         # integralproductrule()
