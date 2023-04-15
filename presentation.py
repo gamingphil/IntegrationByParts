@@ -367,8 +367,10 @@ class PartielleIntegration(Scene):
             self.play(Write(title))
             self.play(title.animate.scale(0.7).to_corner(UP + LEFT))
 
+            ### EXAMPLE 1: x^4 * ln(x)
+
             ex1_1 = MathTex(r"\int x^4 \ln(x) \, dx")
-            ex1_2 = MathTex(r"= \frac{1}{5}x^5 \ln(x)", r"- \int \frac{1}{5}x^5 \cdot \frac{1}{x} \, dx")
+            ex1_2 = MathTex(r"= \frac{1}{5}x^5 \ln(x)-", r" \int \frac{1}{5}x^5 \cdot \frac{1}{x} \, dx")
             ex1_3 = MathTex(r"= \frac{1}{5}x^2 \ln(x) - \int \frac{1}{5}x^4 \, dx")
             ex1_4 = MathTex(r"= \frac{1}{5}x^2 \ln(x) - \frac{1}{25}x^5 + c")
 
@@ -402,6 +404,92 @@ class PartielleIntegration(Scene):
             self.play(Write(ex1_3))
             self.wait(1)
             self.play(Write(ex1_4))
+            self.wait(3)
+
+            self.play(Unwrite(VGroup(ex1_1, ex1_2, ex1_3, ex1_4, ex1part1, ex1part2, ex1part3, ex1part4)))
+
+
+            ### EXAMPLE 2: x^2 * e^x
+
+
+            ex2_1 = MathTex(r"\int x^2 e^x \, dx")
+            ex2_2 = MathTex(r"= x^2 e^x-", r"\int \frac{1}{2}x e^x \, dx")
+            ex2_3 = MathTex(r"= x^2 e^x- \left(", r"\frac{1}{2}x e^x", r"-\int \frac{1}{2}e^x \, dx \right)")
+            ex2_4 = MathTex(r"= x^2 e^x", r"- \left( \frac{1}{2}x e^x", r"- \frac{1}{2}e^x \right)")
+            ex2_5 = MathTex(r"=", r"x^2", r"e^x", r"- \frac{1}{2}x", r"e^x", r"+ \frac{1}{2}", r"e^x", r"+ c")
+            ex2_6 = MathTex(r"=", r"e^x", r"\left(", r"x^2", r"- \frac{1}{2}x", r"+ \frac{1}{2}", r"\right)", r"+ c")
+
+            ex2 = VGroup(ex2_1, ex2_2, ex2_3, ex2_4, ex2_5).arrange(DOWN).set_x(0).arrange(DOWN, buff=0.4, aligned_edge=LEFT).scale(0.85).to_corner(LEFT).shift(DOWN*0.3)
+            ex2_6.scale(0.85).move_to(ex2_5, aligned_edge=LEFT)
+
+
+            ex2part1 = MathTex(r"u=", r"x^2")
+            ex2part2 = MathTex(r"u'=", r"\frac{1}{2}x")
+            ex2part3 = MathTex(r"v=", r"e^x")
+            ex2part4 = MathTex(r"v'=", r"e^x")
+
+            ex2parts = VGroup(ex2part1, ex2part2, ex2part3, ex2part4)
+            ex2parts.arrange_in_grid(cols=2, buff=0.5, col_alignments="ll",col_widths=None).to_corner(RIGHT).shift(LEFT*0.5)
+
+            ex2_2part1 = MathTex(r"u=", r"\frac{1}{2}x")
+            ex2_2part2 = MathTex(r"u'=", r"\frac{1}{2}")
+            ex2_2part3 = MathTex(r"v=", r"e^x")
+            ex2_2part4 = MathTex(r"v'=", r"e^x")
+
+            ex2_2parts = VGroup(ex2_2part1, ex2_2part2, ex2_2part3, ex2_2part4)
+            ex2_2parts.arrange_in_grid(cols=2, buff=0.5, col_alignments="ll",col_widths=None).to_corner(RIGHT).shift(LEFT*0.5)
+
+
+            self.wait(1)
+            self.play(Write(ex2_1))
+            self.wait(2)
+            self.play(Write(VGroup(ex2part1[0], ex2part2[0], ex2part3[0], ex2part4[0])))
+            self.wait(1)
+            self.play(Write(ex2part1[1]))
+            self.wait(1)
+            self.play(Write(ex2part4[1]))
+            self.wait(1)
+            self.play(Write(ex2part2[1]))
+            self.wait(1)
+            self.play(Write(ex2part3[1]))
+            self.wait(1)
+            self.play(Write(ex2_2[0]))
+            self.wait(1)
+            self.play(Write(ex2_2[1]))
+            self.wait(1)
+
+
+            self.play(
+                Unwrite(VGroup(ex2part1[1], ex2part2[1], ex2part3[1], ex2part4[1])), 
+                Transform(VGroup(ex2part1[0], ex2part2[0], ex2part3[0], ex2part4[0]), VGroup(ex2_2part1[0], ex2_2part2[0] ,ex2_2part3[0], ex2_2part4[0]))
+                )
+            
+            self.wait(1)
+            self.play(Write(ex2_2part1[1]))
+            self.wait(1)
+            self.play(Write(ex2_2part4[1]))
+            self.wait(1)
+            self.play(Write(ex2_2part2[1]))
+            self.wait(1)
+            self.play(Write(ex2_2part3[1]))
+            self.wait(1)
+            self.play(Write(ex2_3[0]))
+            self.wait(1)
+            self.play(Write(ex2_3[1]))
+            self.wait(1)
+            self.play(Write(ex2_3[2]))
+            self.wait(1)
+            self.play(Write(ex2_4))
+            self.wait(1)
+            self.play(Write(ex2_5))
+            self.wait(1)
+            self.play(TransformMatchingTex(ex2_5, ex2_6))
+            self.wait(3)
+
+
+            self.play(Unwrite(VGroup(title, ex2_1, ex2_2, ex2_3, ex2_4, ex2_6, ex2part1[0], ex2_2part1[1], ex2part2[0], ex2_2part2[1], ex2part3[0], ex2_2part3[1], ex2part4[0], ex2_2part4[1])))
+            self.wait(1)
+
             
 
 
