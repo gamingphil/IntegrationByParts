@@ -14,7 +14,7 @@ class PartielleIntegration(Scene):
                 font_size=55
             )
             title2 = Text(
-                "Philip Mogilski, 23.02.2023", 
+                "Philip Mogilski, 18.04.2023", 
                 font="Roboto Light", 
                 font_size=30
             )        
@@ -491,10 +491,66 @@ class PartielleIntegration(Scene):
             self.wait(1)
 
             
+        def phoenix():
+            title = Text(
+                "Phoenix-Integration",
+                font="Roboto Medium", 
+                font_size=55
+            )
+
+            self.play(Write(title))
+            self.play(title.animate.scale(0.7).to_corner(UP + LEFT))
+
+            phoenix1 = MathTex(r"\int \sin(x)\cos(x) \, dx =", r"\sin^2(x) -", r"\int \sin(x)\cos(x) \, dx", font_size=35)
+            phoenix2 = MathTex(r"2\int \sin(x)\cos(x)\, dx= \sin^2(x)", font_size=35)
+            phoenix3 = MathTex(r"\int \sin(x)\cos(x)\, dx &= \frac{\sin^2(x)}{2} + c", font_size=35)
+
+            phoenix = VGroup(phoenix1, phoenix2, phoenix3).arrange(DOWN, buff=0.3, aligned_edge=LEFT).to_corner(LEFT + UP).shift(DOWN)
+
+            phoenix1l = MathTex(r"|\; + \int \sin(x)\cos(x) \, dx", font_size=35)
+            phoenix2l = MathTex(r"|\; :2", font_size=35)
+
+            phoenixl = VGroup(phoenix1l, phoenix2l).arrange(DOWN, buff=0.45, aligned_edge=LEFT).to_corner(RIGHT + UP).shift(DOWN)
+
+            part1 = MathTex(r"u =", "\sin(x)")
+            part2 = MathTex(r"u' =", r"\cos(x)")
+            part3 = MathTex(r"v =", r"\sin(x)")
+            part4 = MathTex(r"v' =", r"\cos(x)")
+
+            parts = VGroup(part1, part2, part3, part4)
+            parts.arrange_in_grid(cols=2, buff=0.3, col_alignments="ll",col_widths=None).to_corner(DOWN).shift(UP*0.7)
+
+            
+            self.wait(1)
+            self.play(Write(phoenix1[0]))
+            self.play(Write(VGroup(part1[0], part2[0], part3[0], part4[0])))
+            self.wait(1)
+            self.play(Write(part1[1]))
+            self.wait(1)
+            self.play(Write(part4[1]))
+            self.wait(1)
+            self.play(Write(part2[1]))
+            self.wait(1)
+            self.play(Write(part3[1]))
+            self.wait(1)
+            self.play(Write(phoenix1[1]))
+            self.wait(1)
+            self.play(Write(phoenix1[2]))
+            self.wait(1)
+            self.play(Write(phoenix1l))
+            self.wait(1)
+            self.play(Write(phoenix2))
+            self.wait(1)
+            self.play(Write(phoenix2l))
+            self.wait(1)
+            self.play(Write(phoenix3))
+
+        
 
 
-        # titlepage()
-        # topics()
-        # indefiniteIntegral()
-        # integralproductrule()
+        titlepage()
+        topics()
+        indefiniteIntegral()
+        integralproductrule()
         examples()
+        phoenix()
