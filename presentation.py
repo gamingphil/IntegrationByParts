@@ -84,7 +84,7 @@ class PartielleIntegration(Scene):
 
             productrule1 = MathTex(r"f(x) = u(x) \cdot v(x)", font_size = 60)
             productrule2 = MathTex(r"f'(x) = u'(x) \cdot v(x) + u(x) \cdot v'(x)", font_size = 60)
-            productrule3 = MathTex(r"\int f(x)\; dx = \;?", font_size = 60)
+            productrule3 = MathTex(r"\int f(x)\, dx = \;?", font_size = 60)
 
             productrule = VGroup(productrule1, productrule2).set_x(0).arrange(DOWN, buff=1.2, aligned_edge=LEFT).to_corner(LEFT)
             productrule3.move_to(productrule2, aligned_edge=LEFT)
@@ -101,13 +101,13 @@ class PartielleIntegration(Scene):
 
             derivation1 = MathTex("(uv)'", "=", "u'v + uv'")
             derivation1copy = MathTex("(uv)'", "=", "u'v + uv'")
-            derivation2 = MathTex("\int", "(uv)'", "\;dx", "=", "\int", "u'v + uv'", "\;dx")
-            derivation2copy = MathTex("\int (", "uv", ")' \;dx", "=", "\int u'v + uv' \;dx")
-            derivation3 = MathTex("uv", "=", "\int u'v + uv' \;dx")
-            derivation3copy = MathTex("uv", "=", "\int", "u'v", "+", "uv'", "\;dx")
-            derivation4 = MathTex("uv", "=", "\int", "u'v", "\;dx", "+", "\int", "uv'", "\;dx")
-            derivation4copy = MathTex("uv", "=", "\int u'v \;dx", "+", "\int uv' \;dx")
-            derivation4_2 = MathTex("\int uv' \;dx", "=", "uv", "-", "\int u'v \;dx")
+            derivation2 = MathTex("\int", "(uv)'", "\,dx", "=", "\int", "u'v + uv'", "\,dx")
+            derivation2copy = MathTex("\int (", "uv", ")' \,dx", "=", "\int u'v + uv' \,dx")
+            derivation3 = MathTex("uv", "=", "\int u'v + uv' \,dx")
+            derivation3copy = MathTex("uv", "=", "\int", "u'v", "+", "uv'", "\,dx")
+            derivation4 = MathTex("uv", "=", "\int", "u'v", "\,dx", "+", "\int", "uv'", "\,dx")
+            derivation4copy = MathTex("uv", "=", "\int u'v \,dx", "+", "\int uv' \,dx")
+            derivation4_2 = MathTex("\int uv' \,dx", "=", "uv", "-", "\int u'v \,dx")
 
             derivation = VGroup(derivation1, derivation2, derivation3, derivation4).set_x(0).arrange(DOWN, buff=0.4, aligned_edge=LEFT).to_corner(LEFT).shift(DOWN*0.2)
 
@@ -188,7 +188,7 @@ class PartielleIntegration(Scene):
             self.play(DrawBorderThenFill(vbrace), Write(vtext))
 
 
-            derivationcolored = MathTex("\int uv' \;dx = uv - \int u'v \;dx")
+            derivationcolored = MathTex("\int uv' \,dx = uv - \int u'v \,dx")
             derivationcolored.move_to(ORIGIN).shift(UP*1.5).scale(1.2)
             derivationcolored[0][1:2].set_color(RED_C)
             derivationcolored[0][2:4].set_color(GREEN_C)
@@ -371,8 +371,8 @@ class PartielleIntegration(Scene):
 
             ex1_1 = MathTex(r"\int x^4 \ln(x) \, dx")
             ex1_2 = MathTex(r"= \frac{1}{5}x^5 \ln(x)-", r" \int \frac{1}{5}x^5 \cdot \frac{1}{x} \, dx")
-            ex1_3 = MathTex(r"= \frac{1}{5}x^2 \ln(x) - \int \frac{1}{5}x^4 \, dx")
-            ex1_4 = MathTex(r"= \frac{1}{5}x^2 \ln(x) - \frac{1}{25}x^5 + c")
+            ex1_3 = MathTex(r"= \frac{1}{5}x^5 \ln(x) - \int \frac{1}{5}x^4 \, dx")
+            ex1_4 = MathTex(r"= \frac{1}{5}x^5 \ln(x) - \frac{1}{25}x^5 + c")
 
             ex1 = VGroup(ex1_1, ex1_2, ex1_3, ex1_4).arrange(DOWN).set_x(0).arrange(DOWN, buff=0.4, aligned_edge=LEFT).to_corner(LEFT).shift(DOWN*0.3)
 
@@ -640,6 +640,412 @@ class PartielleIntegration(Scene):
             self.play(Unwrite(VGroup(title, ex1, ex2, ex3_2, ex3l, ex4_2, ex4l, ex5)))
 
 
+        def dimethod():
+            title = Text(
+                "DI-Methode",
+                font="Roboto Medium", 
+                font_size=55
+            )
+
+            self.play(Write(title))
+            self.play(title.animate.scale(0.7).to_corner(UP + LEFT))
+
+            ### 1st stop: x^2 sin(3x)
+
+            ex1 = MathTex(r"\int x^2 \sin(3x) \, dx")
+            ex2 = MathTex(r"=", r"-\frac{1}{3}x^2\cos(3x)", r"+ \frac{2}{9}x \sin(3x)")
+            ex3 = MathTex(r"+ \frac{2}{27}\cos(3x)", r"+c")
+
+            ex = VGroup(ex1, ex2, ex3)
+            ex.arrange(DOWN, buff=0.3, aligned_edge=LEFT).to_corner(LEFT + UP).shift(DOWN)
+            ex3.shift(RIGHT*0.5)
+
+            emptycorner = MathTex(r"")
+            sign1 = MathTex(r"+")
+            sign2 = MathTex(r"-")
+            sign3 = MathTex(r"+")
+            sign4 = MathTex(r"-")
+
+            Dhead = MathTex(r"D")
+            Ihead = MathTex(r"I")
+
+            D_1 = MathTex(r"x^2")
+            D_2 = MathTex(r"2x")
+            D_3 = MathTex(r"2")
+            D_4 = MathTex(r"0")
+
+            I_1 = MathTex(r"\sin(3x)")
+            I_2 = MathTex(r"-\frac{1}{3}\cos(3x)")
+            I_3 = MathTex(r"-\frac{1}{9}\sin(3x)")
+            I_4 = MathTex(r"\frac{1}{27}\cos(3x)")
+
+            DItable = VGroup(emptycorner, Dhead, Ihead, sign1, D_1, I_1, sign2, D_2, I_2, sign3, D_3, I_3, sign4, D_4, I_4)
+            DItable.arrange_in_grid(cols=3, buff=0.6, col_alignments="ccc",col_widths=None).scale(0.9).to_corner(RIGHT).shift(LEFT*0.4)
+
+            arrow1 = Arrow(start= D_1.get_center(), end=I_2.get_center(), buff=0.7).shift(LEFT*0.4)
+            arrow2 = Arrow(start= D_2.get_center(), end=I_3.get_center(), buff=0.75).shift(LEFT*0.4)
+            arrow3 = Arrow(start= D_3.get_center(), end=I_4.get_center(), buff=0.75).shift(LEFT*0.5)
+            
+            self.wait(1)
+            self.play(Write(VGroup(ex1, ex2[0])))
+            self.wait(1)
+            self.play(Write(VGroup(Dhead, Ihead)))
+            self.wait(1)
+            self.play(Write(VGroup(sign1, sign2, sign3, sign4)))
+            self.wait(1)
+            self.play(Write(D_1))
+            self.wait(1)
+            self.play(Write(I_1))
+            self.wait(1)
+            self.play(Write(I_2))
+            self.wait(1)
+            self.play(Write(I_3))
+            self.wait(1)
+            self.play(Write(I_4))
+            self.wait(1)
+            self.play(Write(D_2))
+            self.wait(1)
+            self.play(Write(D_3))
+            self.wait(1)
+            self.play(Write(D_4))
+            self.wait(1)
+            self.play(
+                Write(arrow1),
+                sign1.animate.scale(1.1).set_color(YELLOW_C),
+                D_1.animate.scale(1.1).set_color(YELLOW_C),
+                I_2.animate.scale(1.1).set_color(YELLOW_C)
+            )
+            self.wait(1)
+            self.play(Write(ex2[1]))
+            self.wait(1)
+            self.play(
+                Unwrite(arrow1),
+                sign1.animate.scale(0.9).set_color(WHITE),
+                D_1.animate.scale(0.9).set_color(WHITE),
+                I_2.animate.scale(0.9).set_color(WHITE)
+            )
+            self.wait(1)
+            self.play(
+                Write(arrow2),
+                sign2.animate.scale(1.1).set_color(YELLOW_C),
+                D_2.animate.scale(1.1).set_color(YELLOW_C),
+                I_3.animate.scale(1.1).set_color(YELLOW_C)
+            )
+            self.wait(1)
+            self.play(Write(ex2[2]))
+            self.wait(1)
+            self.play(
+                Unwrite(arrow2),
+                sign2.animate.scale(0.9).set_color(WHITE),
+                D_2.animate.scale(0.9).set_color(WHITE),
+                I_3.animate.scale(0.9).set_color(WHITE)
+            )
+            self.wait(1)
+            self.play(
+                Write(arrow3),
+                sign3.animate.scale(1.1).set_color(YELLOW_C),
+                D_3.animate.scale(1.1).set_color(YELLOW_C),
+                I_4.animate.scale(1.1).set_color(YELLOW_C)
+            )
+            self.wait(1)
+            self.play(Write(ex3[0]))
+            self.wait(1)
+            self.play(
+                Unwrite(arrow3),
+                sign3.animate.scale(0.9).set_color(WHITE),
+                D_3.animate.scale(0.9).set_color(WHITE),
+                I_4.animate.scale(0.9).set_color(WHITE)
+            )
+            self.play(Write(ex3[1]))
+            self.wait(3)
+            self.play(Unwrite(VGroup(ex, DItable)))
+
+            ### 2nd stop: ln(x)
+
+            ex21_1 = MathTex(r"\int \ln(x)", r"\, dx")
+            ex21_2 = MathTex(r"\int \ln(x)", r"\cdot 1", r"\, dx")
+            ex22_1 = MathTex(r"=", r"x\ln(x)", r"- \int", r"\frac{1}{x} \cdot x", r"\,dx")
+            ex22_2 = MathTex(r"=", r"x\ln(x)", r"- \int", r"1", r"\,dx")
+            ex23 = MathTex(r"=x\ln(x) - x + c")
+
+            exn2 = VGroup(ex21_1, ex22_1, ex23)
+            exn2.arrange(DOWN, buff=0.3, aligned_edge=LEFT).to_corner(LEFT + UP).shift(DOWN)
+            ex21_2.move_to(ex21_1, aligned_edge=LEFT)
+            ex22_2.move_to(ex22_1, aligned_edge=LEFT)
+
+            emptycorner2 = MathTex(r"")
+            sign21 = MathTex(r"+")
+            sign22 = MathTex(r"-")
+
+            D2head = MathTex(r"D")
+            I2head = MathTex(r"I")
+
+            D2_1 = MathTex(r"\ln(x)")
+            D2_2 = MathTex(r"\frac{1}{x}")
+
+            I2_1 = MathTex(r"1")
+            I2_2 = MathTex(r"x")
+
+
+            DItable2 = VGroup(emptycorner2, D2head, I2head, sign21, D2_1, I2_1, sign22, D2_2, I2_2)
+            DItable2.arrange_in_grid(cols=3, buff=0.6, col_alignments="ccc",col_widths=None).scale(0.9).to_corner(RIGHT).shift(LEFT*1.5)
+
+            arrow21 = Arrow(start= D2_1.get_center(), end=I2_2.get_center(), buff=0.5).shift(DOWN*0.1 + RIGHT*0.1)
+            
+            framebox1 = SurroundingRectangle(VGroup(sign22, D2_2, I2_2), buff = .2)
+
+            self.wait(1)
+            self.play(Write(VGroup(ex21_1, ex22_1[0])))
+            self.play(Write(VGroup(D2head, I2head, sign21, sign22)))
+            self.wait(1)
+            self.play(TransformMatchingTex(ex21_1, ex21_2))
+            self.wait(1)
+            self.play(Write(D2_1))
+            self.wait(1)
+            self.play(Write(I2_1))
+            self.wait(1)
+            self.play(Write(I2_2))
+            self.wait(1)
+            self.play(Write(D2_2))
+            self.wait(1)
+            self.play(Create(framebox1))
+            self.wait(1)
+            self.play(Uncreate(framebox1))
+            self.play(
+                Write(arrow21),
+                sign21.animate.scale(1.1).set_color(YELLOW_C),
+                D2_1.animate.scale(1.1).set_color(YELLOW_C),
+                I2_2.animate.scale(1.1).set_color(YELLOW_C)
+            )
+            self.wait(1)
+            self.play(Write(ex22_1[1]))
+            self.wait(1)
+            self.play(
+                Unwrite(arrow21),
+                sign21.animate.scale(0.9).set_color(WHITE),
+                D2_1.animate.scale(0.9).set_color(WHITE),
+                I2_2.animate.scale(0.9).set_color(WHITE)
+            )
+            self.play(
+                sign22.animate.scale(1.1).set_color(YELLOW_C),
+                D2_2.animate.scale(1.1).set_color(YELLOW_C),
+                I2_2.animate.scale(1.1).set_color(YELLOW_C)
+            )
+            self.wait(1)
+            self.play(Write(VGroup(ex22_1[2], ex22_1[3], ex22_1[4])))
+            self.wait(1)
+            self.play(TransformMatchingTex(ex22_1, ex22_2))
+            self.wait(1)
+            self.play(
+                sign22.animate.scale(0.9).set_color(WHITE),
+                D2_2.animate.scale(0.9).set_color(WHITE),
+                I2_2.animate.scale(0.9).set_color(WHITE)
+            )
+            self.play(Write(ex23))
+            self.wait(3)
+            self.play(Unwrite(VGroup(ex21_2, ex22_2, ex23, DItable2)))
+
+            ### 3rd stop: e^-x cos(x)
+
+            ex31 = MathTex(r"\int e^{-x} \cos(x) \, dx =", r"e^{-x}\sin(x)", r"- e^{-x}\cos(x)", r"- \int e^{-x} \cos(x) \,dx", font_size = 35)
+            ex32_1 = MathTex(r"2\int e^{-x} \cos(x)\, dx =", r"e^{-x}", r"\sin(x) -", r"e^{-x}", r"\cos(x)", font_size = 35)
+            ex32_2 = MathTex(r"2\int e^{-x} \cos(x)\, dx =", r"e^{-x}", r"\left(", r"\sin(x) -", r"\cos(x)",r"\right)", font_size = 35)
+            ex33 = MathTex(r"\int e^{-x} \cos(x) \, dx = \frac{1}{2} e^{-x}\left(\sin(x) - \cos(x)\right)", font_size = 35)
+
+            exn3 = VGroup(ex31, ex32_1, ex33)
+            exn3.arrange(DOWN, buff=0.3, aligned_edge=LEFT).to_corner(LEFT + UP).shift(DOWN)
+            ex32_2.move_to(ex32_1, aligned_edge=LEFT)
+
+            ex31l = MathTex(r"|\; + \int e^{-x} \cos(x) \, dx", font_size = 35)
+            ex32l = MathTex(r"|\; :2", font_size = 35)
+
+            ex3l = VGroup(ex31l, ex32l).arrange(DOWN, buff=0.45, aligned_edge=LEFT).to_corner(RIGHT + UP).shift(DOWN)
+
+
+            emptycorner3 = MathTex(r"")
+            sign31 = MathTex(r"+")
+            sign32 = MathTex(r"-")
+            sign33 = MathTex(r"+")
+
+            D3head = MathTex(r"D")
+            I3head = MathTex(r"I")
+
+            D3_1 = MathTex(r"e^{-x}")
+            D3_2 = MathTex(r"-e^{-x}")
+            D3_3 = MathTex(r"e^{-x}")
+
+            I3_1 = MathTex(r"\cos(x)")
+            I3_2 = MathTex(r"\sin(x)")
+            I3_3 = MathTex(r"-\cos(x)")
+
+            DItable3 = VGroup(emptycorner3, D3head, I3head, sign31, D3_1, I3_1, sign32, D3_2, I3_2, sign33, D3_3, I3_3)
+            DItable3.arrange_in_grid(cols=3, buff=0.6, col_alignments="ccc",col_widths=None).scale(0.9).to_corner(RIGHT + DOWN).shift(LEFT*0.4 + UP*0.5)
+
+            arrow31 = Arrow(start= D3_1.get_center(), end=I3_2.get_center(), buff=0.7).shift(LEFT*0.1)
+            arrow32 = Arrow(start= D3_2.get_center(), end=I3_3.get_center(), buff=0.75).shift(LEFT*0.1)
+
+            framebox2 = SurroundingRectangle(VGroup(sign33, D3_3, I3_3), buff = .2)
+
+            self.wait(1)
+            self.play(Write(ex31[0]))
+            self.play(Write(VGroup(D3head, I3head, sign31, sign32, sign33)))
+            self.wait(1)
+            self.play(Write(D3_1))
+            self.wait(1)
+            self.play(Write(I3_1))
+            self.wait(1)
+            self.play(Write(I3_2))
+            self.wait(1)
+            self.play(Write(I3_3))
+            self.wait(1)
+            self.play(Write(D3_2))
+            self.wait(1)
+            self.play(Write(D3_3))
+            self.wait(1)
+            self.play(Create(framebox2))
+            self.wait(1)
+            self.play(Uncreate(framebox2))
+            self.play(
+                Write(arrow31),
+                sign31.animate.scale(1.1).set_color(YELLOW_C),
+                D3_1.animate.scale(1.1).set_color(YELLOW_C),
+                I3_2.animate.scale(1.1).set_color(YELLOW_C)
+            )
+            self.wait(1)
+            self.play(Write(ex31[1]))
+            self.wait(1)
+            self.play(
+                Unwrite(arrow31),
+                sign31.animate.scale(0.9).set_color(WHITE),
+                D3_1.animate.scale(0.9).set_color(WHITE),
+                I3_2.animate.scale(0.9).set_color(WHITE)
+            )
+            self.play(
+                Write(arrow32),
+                sign32.animate.scale(1.1).set_color(YELLOW_C),
+                D3_2.animate.scale(1.1).set_color(YELLOW_C),
+                I3_3.animate.scale(1.1).set_color(YELLOW_C)
+            )
+            self.wait(1)
+            self.play(Write(ex31[2]))
+            self.wait(1)
+            self.play(
+                Unwrite(arrow32),
+                sign32.animate.scale(0.9).set_color(WHITE),
+                D3_2.animate.scale(0.9).set_color(WHITE),
+                I3_3.animate.scale(0.9).set_color(WHITE)
+            )
+            self.play(
+                sign33.animate.scale(1.1).set_color(YELLOW_C),
+                D3_3.animate.scale(1.1).set_color(YELLOW_C),
+                I3_3.animate.scale(1.1).set_color(YELLOW_C)
+            )
+            self.wait(1)
+            self.play(Write(ex31[3]))
+            self.wait(1)
+            self.play(
+                sign33.animate.scale(0.9).set_color(WHITE),
+                D3_3.animate.scale(0.9).set_color(WHITE),
+                I3_3.animate.scale(0.9).set_color(WHITE)
+            )
+            self.play(Write(ex31l))
+            self.wait(1)
+            self.play(Write(ex32_1))
+            self.wait(1)
+            self.play(TransformMatchingTex(ex32_1, ex32_2))
+            self.wait(1)
+            self.play(Write(ex32l))
+            self.wait(1)
+            self.play(Write(ex33))
+            self.wait(3)
+            self.play(Unwrite(VGroup(ex31, ex31l, ex32_2, ex32l, ex33, DItable3)))
+            
+            ### why does it work?
+
+            formula = MathTex(r"\int uv' \,dx = uv -", r"\int u'v \,dx")
+            formula.to_corner(UP).shift(DOWN)
+
+            dividerline = Line(LEFT*6, RIGHT*6).shift(UP*0.9)
+
+            dividerline.set_stroke(color=GREY, width=1)
+
+            emptycornerw = MathTex(r"")
+            signw1 = MathTex(r"+")
+            signw2 = MathTex(r"-")
+            signw3 = MathTex(r"+")
+
+            Dwhead = MathTex(r"D")
+            Iwhead = MathTex(r"I")
+
+            Dw_1 = MathTex(r"u")
+            Dw_2 = MathTex(r"u'")
+            Dw_3 = MathTex(r"u''")
+
+            Iw_1 = MathTex(r"v'")
+            Iw_2 = MathTex(r"v")
+            Iw_3 = MathTex(r"V")
+
+            DItablew = VGroup(emptycornerw, Dwhead, Iwhead, signw1, Dw_1, Iw_1, signw2, Dw_2, Iw_2, signw3, Dw_3, Iw_3)
+            DItablew.arrange_in_grid(cols=3, buff=0.6, col_alignments="ccc",col_widths=[0.5, 1, 1],).scale(0.9).to_corner( DOWN).shift(UP*0.7 + LEFT*0.5)
+            Iw_1.shift(UP*0.08)
+            Dw_2.shift(UP*0.08)
+
+            arroww1 = Arrow(start= Dw_1.get_center(), end=Iw_2.get_center(), buff=0.55)#.shift(LEFT*0.1)
+
+            self.wait(1)
+
+            self.play(Write(formula))
+            self.play(Create(dividerline))
+            self.play(Write(VGroup(Dwhead, Iwhead, signw1, signw2, signw3)))
+            self.wait(1)
+            self.play(Write(VGroup(Dw_1, Iw_1)))
+            self.play(
+                Dw_1.animate.set_color(RED_C),
+                Iw_1.animate.set_color(RED_C),
+                formula[0][1:4].animate.set_color(RED_C)
+            )
+            self.wait(1)
+            self.play(Write(VGroup(Dw_2, Iw_2)))
+            self.wait(1)
+            self.play(Write(arroww1))
+            self.play(
+                arroww1.animate.set_color(GREEN_C),
+                formula[0][7:9].animate.set_color(GREEN_C)
+            )
+            self.wait(1)
+            self.play(
+                Dw_2.animate.set_color(YELLOW_E),
+                Iw_2.animate.set_color(YELLOW_E),
+                formula[1][1:4].animate.set_color(YELLOW_E)
+            )
+
+            formula2 = MathTex(r"\int u'v \,dx")
+            formula2[0][1:4].set_color(YELLOW_E)
+            formula2.move_to(formula, aligned_edge=LEFT)
+
+            self.wait(1)
+            self.play(FadeOut(formula[0]))
+            self.play(TransformMatchingShapes(formula[1], formula2))
+            self.wait(1)
+
+            formula3 = MathTex(r"\int uv' \,dx", r"= uv - \int u'v \,dx")
+            formula3.to_corner(UP).shift(DOWN)
+            formula3[0][1:4].set_color(RED_C)
+            formula3[1][1:3].set_color(GREEN_C)
+            formula3[1][5:8].set_color(YELLOW_E)
+
+            self.play(TransformMatchingShapes(formula2, formula3[0]))
+            self.wait(1)
+            self.play(VGroup(Dw_1, Iw_1, Dw_2, Iw_2, arroww1).animate.shift(DOWN*0.94))
+            self.wait(1)
+            self.play(Write(formula3[1]))
+            self.wait(3)
+            self.play(Unwrite(VGroup(title, formula3, Dwhead, Iwhead, signw1, signw2, signw3, Dw_1, Iw_1, Dw_2, Iw_2, arroww1)), Uncreate(dividerline))
+            self.wait(1)
+
+            
+
+            
 
 
         # titlepage()
@@ -647,4 +1053,5 @@ class PartielleIntegration(Scene):
         # indefiniteIntegral()
         # integralproductrule()
         # examples()
-        phoenix()
+        # phoenix()
+        dimethod()
