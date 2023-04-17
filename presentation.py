@@ -745,7 +745,6 @@ class PartielleIntegration(Scene):
                 D_1.animate.scale(0.9).set_color(WHITE),
                 I_2.animate.scale(0.9).set_color(WHITE)
             )
-            pause()
             self.play(
                 Write(arrow2),
                 sign2.animate.scale(1.1).set_color(YELLOW_C),
@@ -761,7 +760,6 @@ class PartielleIntegration(Scene):
                 D_2.animate.scale(0.9).set_color(WHITE),
                 I_3.animate.scale(0.9).set_color(WHITE)
             )
-            pause()
             self.play(
                 Write(arrow3),
                 sign3.animate.scale(1.1).set_color(YELLOW_C),
@@ -1020,7 +1018,6 @@ class PartielleIntegration(Scene):
             self.play(Write(VGroup(Dwhead, Iwhead, signw1, signw2, signw3)))
             pause()
             self.play(Write(VGroup(Dw_1, Iw_1)))
-            pause()
             self.play(
                 Dw_1.animate.set_color(RED_C),
                 Iw_1.animate.set_color(RED_C),
@@ -1077,17 +1074,23 @@ class PartielleIntegration(Scene):
             self.play(Write(title))
             self.play(title.animate.scale(0.7).to_corner(UP + LEFT))
 
+            originalformula = MathTex(r"\int uv' \,dx = uv - \int u'v \,dx", font_size= 50)
+
             formula = MathTex(r"\int_a^b uv' \, dx =", r"\left[uv\right]_a^b - \int_a^b u'v \, dx", font_size= 50)
+
+            formulae = VGroup(originalformula, formula).arrange(DOWN, buff=1)
 
             question = MathTex(r"\int_a^b uv' \, dx =", r"\; ?", font_size= 50)
             question.move_to(formula, aligned_edge=LEFT)
+            pause()
+            self.play(Write(originalformula))
             pause()
             self.play(Write(question))
             pause()
             self.play(Unwrite(question[1]))
             self.play(Write(formula[1]))
             pause()
-            self.play(Unwrite(VGroup(title, question[0], formula[1])))
+            self.play(Unwrite(VGroup(title, originalformula, question[0], formula[1])))
             pause()
 
         def end():

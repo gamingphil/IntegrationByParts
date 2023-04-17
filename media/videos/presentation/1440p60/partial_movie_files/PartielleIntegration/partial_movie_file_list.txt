@@ -1,0 +1,6 @@
+# This file is used internally by FFMPEG.
+file 'file:F:/School/Jahrgangsstufe/M51 Mathe/IntegrationByParts/media/videos/presentation/1440p60/partial_movie_files/PartielleIntegration/2869775184_47785787_2234823750.mp4'
+file 'file:F:/School/Jahrgangsstufe/M51 Mathe/IntegrationByParts/media/videos/presentation/1440p60/partial_movie_files/PartielleIntegration/2869775184_1668323417_2793227297.mp4'
+file 'file:F:/School/Jahrgangsstufe/M51 Mathe/IntegrationByParts/media/videos/presentation/1440p60/partial_movie_files/PartielleIntegration/2869775184_1486893914_3442804886.mp4'
+file 'file:F:/School/Jahrgangsstufe/M51 Mathe/IntegrationByParts/media/videos/presentation/1440p60/partial_movie_files/PartielleIntegration/2869775184_802457823_1610223921.mp4'
+file 'file:F:/School/Jahrgangsstufe/M51 Mathe/IntegrationByParts/media/videos/presentation/1440p60/partial_movie_files/PartielleIntegration/2869775184_2096964288_4045261834.mp4'
