@@ -1,10 +1,16 @@
 from manim import *
 from manim_slides import Slide
-import manimpango
+from manim_editor import PresentationSectionType
+
+
 
 class PartielleIntegration(Scene):
     def construct(self):
-        
+        def pause():
+            self.wait(0.1)
+            self.next_section(type=PresentationSectionType.NORMAL)
+
+
         self.camera.background_color = "#181b2b"
         def titlepage():
             ### TITLE PAGE ###
@@ -18,14 +24,13 @@ class PartielleIntegration(Scene):
                 font="Roboto Light", 
                 font_size=30
             )        
-
+            
             title1.shift(UP*0.3)
             title2.shift(DOWN*0.5)
 
             self.play(Write(title1))
             self.play(Write(title2))
-            # self.pause()
-            self.wait(1)
+            pause()
             self.play(Unwrite(title1), Unwrite(title2))
 
         def topics():
@@ -64,13 +69,17 @@ class PartielleIntegration(Scene):
             topics.to_corner(LEFT)
 
             self.play(Write(topicstitle))
+            pause()
             self.play(Write(topic1))
+            pause()
             self.play(Write(topic2))
+            pause()
             self.play(Write(topic3))
+            pause()
             self.play(Write(topic4))
-            self.wait(1)
+            pause()
             self.play(Unwrite(VGroup(topicstitle, topics)))
-            self.wait(1)
+            pause()
 
 
         def integralproductrule():
@@ -92,11 +101,13 @@ class PartielleIntegration(Scene):
 
             self.play(Write(title))
             self.play(title.animate.scale(0.7).to_corner(UP + LEFT))
+            pause()
             self.play(Write(productrule1))
+            pause()
             self.play(Write(productrule2))
-            self.wait(1)
+            pause()
             self.play(Transform(productrule2, productrule3))
-            self.wait(1)
+            pause()
 
 
             derivation1 = MathTex("(uv)'", "=", "u'v + uv'")
@@ -121,23 +132,23 @@ class PartielleIntegration(Scene):
             self.play(Unwrite(VGroup(productrule1, productrule2)))
             self.play(Write(derivation1))
             self.add(derivation1copy)
-            self.wait(1)
+            pause()
             self.play(TransformMatchingTex(derivation1, derivation2))
             self.add(derivation2copy)
-            self.wait(1)
+            pause()
             self.play(Transform(derivation2copy,derivation3))
             self.add(derivation3copy)
-            self.wait(1)
+            pause()
             self.play(TransformMatchingTex(derivation3copy, derivation4))
             self.add(derivation4copy)
             self.remove(derivation4)
-            self.wait(1)
+            pause()
             self.play(TransformMatchingTex(derivation4copy, derivation4_2))
             self.wait(0.3)
             self.play(Circumscribe(derivation4copy))
             self.remove(derivation4copy)
             self.add(derivation4_2)
-            self.wait(1)
+            pause()
             self.play(
                 FadeOut(derivation1copy), 
                 FadeOut(derivation2copy),
@@ -159,7 +170,7 @@ class PartielleIntegration(Scene):
 
             example = VGroup(example_1, example_2, example_3).set_x(0).arrange(DOWN, buff=0.5, aligned_edge=LEFT).to_corner(DOWN + LEFT).shift(UP*0.1)
 
-
+            pause()
             self.play(Create(dividerline))
             self.play(Write(example_1))
             self.play(Write(example_2[0]))
@@ -172,6 +183,7 @@ class PartielleIntegration(Scene):
             parts = VGroup(part1, part2, part3, part4)
             parts.arrange_in_grid(cols=2, buff=0.3, col_alignments="ll",col_widths=None).to_corner(RIGHT).shift(DOWN*1.5)
 
+            pause()
             self.play(Write(VGroup(part1[0], part2[0], part3[0], part4[0])))
 
             
@@ -180,11 +192,13 @@ class PartielleIntegration(Scene):
             ubrace = Brace(example_1[1],sharpness=2,buff=0.2).set_color(RED_C)
             utext = MathTex(r"u", font_size=40).next_to(ubrace, DOWN).set_color(RED_C)
 
+            pause()
             self.play(DrawBorderThenFill(ubrace), Write(utext))
 
             vbrace = Brace(example_1[2],sharpness=2,buff=0.1).set_color(GREEN_C)
             vtext = MathTex(r"v'", font_size=40).next_to(vbrace, DOWN*0.4).set_color(GREEN_C)
 
+            pause()
             self.play(DrawBorderThenFill(vbrace), Write(vtext))
 
 
@@ -211,29 +225,31 @@ class PartielleIntegration(Scene):
                 FadeTransform(part4[0], cpart4[0])
             )
 
-            self.wait(1)
+            pause()
             self.play(Write(part1[1]))
+            pause()
             self.play(Write(part4[1]))
-            self.wait(1)
+            pause()
             self.play(Write(part2[1]))
-            self.wait(1)
+            pause()
             self.play(Write(part3[1]))
 
             framebox1 = SurroundingRectangle(derivation4_2[2], buff = .1)
             framebox2group = VGroup(derivation4_2[3], derivation4_2[4])
             framebox2 = SurroundingRectangle(framebox2group, buff = .1)
 
+            pause()
             self.play(Create(framebox1))
-            self.wait(1)
+            pause()
             self.play(Write(example_2[1]))
-            self.wait(1)
+            pause()
             self.play(ReplacementTransform(framebox1, framebox2))
-            self.wait(1)
+            pause()
             self.play(Write(example_2[2]))
 
-            self.wait(1)
+            pause()
             self.play(Write(example_3[0]))
-            self.wait(1)
+            pause()
             self.play(Write(example_3[1]))
 
             ### wrong choice of u and dv
@@ -248,13 +264,13 @@ class PartielleIntegration(Scene):
             wparts = VGroup(wpart1, wpart2, wpart3, wpart4)
             wparts.arrange_in_grid(cols=2, buff=0.3, col_alignments="ll",col_widths=None).to_corner(RIGHT).shift(DOWN*1.5)
 
-            self.wait(4)
+            pause()
             self.play(
                 Unwrite(VGroup(example_2, example_3, part1[1], part2[1], part3[1], part4[1])), 
                 Uncreate(framebox2), 
                 Transform(VGroup(cpart1[0], part2[0], part3[0], cpart4[0]), VGroup(wpart1[0], wpart2[0] ,wpart3[0], wpart4[0]))
                 )
-            self.wait(1)
+            pause()
 
             self.play(
                 ubrace.animate.set_color(GREEN_C),
@@ -264,24 +280,25 @@ class PartielleIntegration(Scene):
             )
 
 
-            self.wait(1)
+            pause()
             self.play(Write(wpart1[1]))
+            pause()
             self.play(Write(wpart4[1]))
-            self.wait(1)
+            pause()
             self.play(Write(wpart2[1]))
-            self.wait(1)
+            pause()
             self.play(Write(wpart3[1]))
-            self.wait(1)
+            pause()
 
             wrongexample_2 = MathTex(r"= \frac{1}{2}x^2 \cos(x)", r"-", r"\int -\frac{1}{2}x^2 \sin(x) \, dx", font_size = 40)
             wrongexample_2.to_corner(LEFT).shift(DOWN*2.5)
 
             self.play(Write(wrongexample_2[0]))
-            self.wait(1)
+            pause()
             self.play(Write(VGroup(wrongexample_2[1], wrongexample_2[2])))
-            self.wait(1)
+            pause()
             self.play(wrongexample_2[2].animate.scale(1.1).set_color(YELLOW_C))
-            self.wait(3)
+            pause()
 
 
             self.play(
@@ -301,15 +318,15 @@ class PartielleIntegration(Scene):
             udvchoice = VGroup(udvchoice1, udvchoice2).arrange(DOWN)
             udvchoice.shift(DOWN*1.5)
 
-            self.wait(1)
+            pause()
             self.play(Write(udvchoice))
-            self.wait(5)
+            pause()
 
             self.play(
                 Unwrite(VGroup(title, derivationcolored, udvchoice)),
                 Uncreate(dividerline, reverse=False)
                 )
-            self.wait(1)
+            pause()
 
 
         def indefiniteIntegral():
@@ -337,24 +354,25 @@ class PartielleIntegration(Scene):
             indefinite.shift(DOWN*0.5)
             indefiniteTextGroup.shift(DOWN*0.5)
 
+            pause()
             self.play(Write(definite[0]))
-            self.wait(1)
+            pause()
             self.play(Write(definite[1]))
-            self.wait(1)
+            pause()
             self.play(Write(definite[2]))
-            self.wait(1)
+            pause()
             self.play(Write(definiteTextGroup))
-            self.wait(1)
+            pause()
             self.play(Write(indefinite[0]))
-            self.wait(1)
+            pause()
             self.play(Write(indefinite[1]))
-            self.wait(1)
+            pause()
             self.play(Write(indefinite[2]))
-            self.wait(1)
+            pause()
             self.play(Write(indefiniteTextGroup))
-            self.wait(5)
+            pause()
             self.play(Unwrite(VGroup(title, slide)))
-            self.wait(1)
+            pause()
 
             
         def examples():
@@ -384,27 +402,27 @@ class PartielleIntegration(Scene):
             ex1parts = VGroup(ex1part1, ex1part2, ex1part3, ex1part4)
             ex1parts.arrange_in_grid(cols=2, buff=0.5, col_alignments="ll",col_widths=None).to_corner(RIGHT).shift(LEFT*0.5)
 
-
+            pause()
             self.play(Write(ex1_1))
-            self.wait(2)
+            pause()
             self.play(Write(VGroup(ex1part1[0], ex1part2[0], ex1part3[0], ex1part4[0])))
-            self.wait(1)
+            pause()
             self.play(Write(ex1part1[1]))
-            self.wait(1)
+            pause()
             self.play(Write(ex1part4[1]))
-            self.wait(1)
+            pause()
             self.play(Write(ex1part2[1]))
-            self.wait(1)
+            pause()
             self.play(Write(ex1part3[1]))
-            self.wait(1)
+            pause()
             self.play(Write(ex1_2[0]))
-            self.wait(1)
+            pause()
             self.play(Write(ex1_2[1]))
-            self.wait(1)
+            pause()
             self.play(Write(ex1_3))
-            self.wait(1)
+            pause()
             self.play(Write(ex1_4))
-            self.wait(3)
+            pause()
 
             self.play(Unwrite(VGroup(ex1_1, ex1_2, ex1_3, ex1_4, ex1part1, ex1part2, ex1part3, ex1part4)))
 
@@ -440,23 +458,23 @@ class PartielleIntegration(Scene):
             ex2_2parts.arrange_in_grid(cols=2, buff=0.5, col_alignments="ll",col_widths=None).to_corner(RIGHT).shift(LEFT*0.5)
 
 
-            self.wait(1)
+            pause()
             self.play(Write(ex2_1))
-            self.wait(2)
+            pause()
             self.play(Write(VGroup(ex2part1[0], ex2part2[0], ex2part3[0], ex2part4[0])))
-            self.wait(1)
+            pause()
             self.play(Write(ex2part1[1]))
-            self.wait(1)
+            pause()
             self.play(Write(ex2part4[1]))
-            self.wait(1)
+            pause()
             self.play(Write(ex2part2[1]))
-            self.wait(1)
+            pause()
             self.play(Write(ex2part3[1]))
-            self.wait(1)
+            pause()
             self.play(Write(ex2_2[0]))
-            self.wait(1)
+            pause()
             self.play(Write(ex2_2[1]))
-            self.wait(1)
+            pause()
 
 
             self.play(
@@ -464,31 +482,31 @@ class PartielleIntegration(Scene):
                 Transform(VGroup(ex2part1[0], ex2part2[0], ex2part3[0], ex2part4[0]), VGroup(ex2_2part1[0], ex2_2part2[0] ,ex2_2part3[0], ex2_2part4[0]))
                 )
             
-            self.wait(1)
+            pause()
             self.play(Write(ex2_2part1[1]))
-            self.wait(1)
+            pause()
             self.play(Write(ex2_2part4[1]))
-            self.wait(1)
+            pause()
             self.play(Write(ex2_2part2[1]))
-            self.wait(1)
+            pause()
             self.play(Write(ex2_2part3[1]))
-            self.wait(1)
+            pause()
             self.play(Write(ex2_3[0]))
-            self.wait(1)
+            pause()
             self.play(Write(ex2_3[1]))
-            self.wait(1)
+            pause()
             self.play(Write(ex2_3[2]))
-            self.wait(1)
+            pause()
             self.play(Write(ex2_4))
-            self.wait(1)
+            pause()
             self.play(Write(ex2_5))
-            self.wait(1)
+            pause()
             self.play(TransformMatchingTex(ex2_5, ex2_6))
-            self.wait(3)
+            pause()
 
 
             self.play(Unwrite(VGroup(title, ex2_1, ex2_2, ex2_3, ex2_4, ex2_6, ex2part1[0], ex2_2part1[1], ex2part2[0], ex2_2part2[1], ex2part3[0], ex2_2part3[1], ex2part4[0], ex2_2part4[1])))
-            self.wait(1)
+            pause()
 
             
         def phoenix():
@@ -521,30 +539,31 @@ class PartielleIntegration(Scene):
             parts.arrange_in_grid(cols=2, buff=0.3, col_alignments="ll",col_widths=None).to_corner(DOWN).shift(UP*0.7)
 
             
-            self.wait(1)
+            pause()
             self.play(Write(phoenix1[0]))
+            pause()
             self.play(Write(VGroup(part1[0], part2[0], part3[0], part4[0])))
-            self.wait(1)
+            pause()
             self.play(Write(part1[1]))
-            self.wait(1)
+            pause()
             self.play(Write(part4[1]))
-            self.wait(1)
+            pause()
             self.play(Write(part2[1]))
-            self.wait(1)
+            pause()
             self.play(Write(part3[1]))
-            self.wait(1)
+            pause()
             self.play(Write(phoenix1[1]))
-            self.wait(1)
+            pause()
             self.play(Write(phoenix1[2]))
-            self.wait(1)
+            pause()
             self.play(Write(phoenix1l))
-            self.wait(1)
+            pause()
             self.play(Write(phoenix2))
-            self.wait(1)
+            pause()
             self.play(Write(phoenix2l))
-            self.wait(1)
+            pause()
             self.play(Write(phoenix3))
-            self.wait(3)
+            pause()
             self.play(Unwrite(VGroup(phoenix1, phoenix1l, phoenix2, phoenix2l, phoenix3, part1, part2, part3, part4)))
 
 
@@ -586,58 +605,60 @@ class PartielleIntegration(Scene):
             exparts2 = VGroup(expart2_1, expart2_2, expart2_3, expart2_4)
             exparts2.arrange_in_grid(cols=2, buff=0.3, col_alignments="ll",col_widths=None).to_corner(DOWN).shift(UP*0.7)
 
-            self.wait(1)
+            pause()
             self.play(Write(ex1[0]))
+            pause()
             self.play(Write(VGroup(expart1[0], expart2[0], expart3[0], expart4[0])))
-            self.wait(1)
+            pause()
             self.play(Write(expart1[1]))
-            self.wait(1)
+            pause()
             self.play(Write(expart4[1]))
-            self.wait(1)
+            pause()
             self.play(Write(expart2[1]))
-            self.wait(1)
+            pause()
             self.play(Write(expart3[1]))
-            self.wait(1)
+            pause()
             self.play(Write(ex1[1]))
-            self.wait(1)
+            pause()
             self.play(Write(ex1[2]))
-            self.wait(2)
+            pause()
             self.play(
                 Unwrite(VGroup(expart1[1], expart2[1], expart3[1], expart4[1])), 
                 Transform(VGroup(expart1[0], expart2[0], expart3[0], expart4[0]), VGroup(expart2_1[0], expart2_2[0] ,expart2_3[0], expart2_4[0]))
                 )
-            self.wait(1)
+            pause()
             self.play(Write(expart2_1[1]))
-            self.wait(1)
+            pause()
             self.play(Write(expart2_4[1]))
-            self.wait(1)
+            pause()
             self.play(Write(expart2_2[1]))
-            self.wait(1)
+            pause()
             self.play(Write(expart2_3[1]))
-            self.wait(1)
+            pause()
             self.play(Write(ex2[0]))
-            self.wait(1)
+            pause()
             self.play(Write(ex2[1]))
-            self.wait(1)
+            pause()
             self.play(Write(ex2[2]))
-            self.wait(1)
+            pause()
             self.play(Unwrite(VGroup(expart1[0] ,expart2_1[1], expart2[0], expart2_2[1], expart3[0], expart2_3[1], expart4[0], expart2_4[1]), reverse=False))
-            self.wait(1)
+            pause()
             self.play(Write(ex3_1))
-            self.wait(1)
+            pause()
             self.play(TransformMatchingTex(ex3_1, ex3_2))
-            self.wait(1)
+            pause()
             self.play(Write(ex3l))
-            self.wait(1)
+            pause()
             self.play(Write(ex4_1))
-            self.wait(1)
+            pause()
             self.play(TransformMatchingTex(ex4_1, ex4_2))
-            self.wait(1)
+            pause()
             self.play(Write(ex4l))
-            self.wait(1)
+            pause()
             self.play(Write(ex5))
-            self.wait(5)
+            pause()
             self.play(Unwrite(VGroup(title, ex1, ex2, ex3_2, ex3l, ex4_2, ex4l, ex5)))
+            pause()
 
 
         def dimethod():
@@ -686,70 +707,70 @@ class PartielleIntegration(Scene):
             arrow2 = Arrow(start= D_2.get_center(), end=I_3.get_center(), buff=0.75).shift(LEFT*0.4)
             arrow3 = Arrow(start= D_3.get_center(), end=I_4.get_center(), buff=0.75).shift(LEFT*0.5)
             
-            self.wait(1)
+            pause()
             self.play(Write(VGroup(ex1, ex2[0])))
-            self.wait(1)
+            pause()
             self.play(Write(VGroup(Dhead, Ihead)))
-            self.wait(1)
+            pause()
             self.play(Write(VGroup(sign1, sign2, sign3, sign4)))
-            self.wait(1)
+            pause()
             self.play(Write(D_1))
-            self.wait(1)
+            pause()
             self.play(Write(I_1))
-            self.wait(1)
+            pause()
             self.play(Write(I_2))
-            self.wait(1)
+            pause()
             self.play(Write(I_3))
-            self.wait(1)
+            pause()
             self.play(Write(I_4))
-            self.wait(1)
+            pause()
             self.play(Write(D_2))
-            self.wait(1)
+            pause()
             self.play(Write(D_3))
-            self.wait(1)
+            pause()
             self.play(Write(D_4))
-            self.wait(1)
+            pause()
             self.play(
                 Write(arrow1),
                 sign1.animate.scale(1.1).set_color(YELLOW_C),
                 D_1.animate.scale(1.1).set_color(YELLOW_C),
                 I_2.animate.scale(1.1).set_color(YELLOW_C)
             )
-            self.wait(1)
+            pause()
             self.play(Write(ex2[1]))
-            self.wait(1)
+            pause()
             self.play(
                 Unwrite(arrow1),
                 sign1.animate.scale(0.9).set_color(WHITE),
                 D_1.animate.scale(0.9).set_color(WHITE),
                 I_2.animate.scale(0.9).set_color(WHITE)
             )
-            self.wait(1)
+            pause()
             self.play(
                 Write(arrow2),
                 sign2.animate.scale(1.1).set_color(YELLOW_C),
                 D_2.animate.scale(1.1).set_color(YELLOW_C),
                 I_3.animate.scale(1.1).set_color(YELLOW_C)
             )
-            self.wait(1)
+            pause()
             self.play(Write(ex2[2]))
-            self.wait(1)
+            pause()
             self.play(
                 Unwrite(arrow2),
                 sign2.animate.scale(0.9).set_color(WHITE),
                 D_2.animate.scale(0.9).set_color(WHITE),
                 I_3.animate.scale(0.9).set_color(WHITE)
             )
-            self.wait(1)
+            pause()
             self.play(
                 Write(arrow3),
                 sign3.animate.scale(1.1).set_color(YELLOW_C),
                 D_3.animate.scale(1.1).set_color(YELLOW_C),
                 I_4.animate.scale(1.1).set_color(YELLOW_C)
             )
-            self.wait(1)
+            pause()
             self.play(Write(ex3[0]))
-            self.wait(1)
+            pause()
             self.play(
                 Unwrite(arrow3),
                 sign3.animate.scale(0.9).set_color(WHITE),
@@ -757,7 +778,7 @@ class PartielleIntegration(Scene):
                 I_4.animate.scale(0.9).set_color(WHITE)
             )
             self.play(Write(ex3[1]))
-            self.wait(3)
+            pause()
             self.play(Unwrite(VGroup(ex, DItable)))
 
             ### 2nd stop: ln(x)
@@ -794,22 +815,22 @@ class PartielleIntegration(Scene):
             
             framebox1 = SurroundingRectangle(VGroup(sign22, D2_2, I2_2), buff = .2)
 
-            self.wait(1)
+            pause()
             self.play(Write(VGroup(ex21_1, ex22_1[0])))
             self.play(Write(VGroup(D2head, I2head, sign21, sign22)))
-            self.wait(1)
+            pause()
             self.play(TransformMatchingTex(ex21_1, ex21_2))
-            self.wait(1)
+            pause()
             self.play(Write(D2_1))
-            self.wait(1)
+            pause()
             self.play(Write(I2_1))
-            self.wait(1)
+            pause()
             self.play(Write(I2_2))
-            self.wait(1)
+            pause()
             self.play(Write(D2_2))
-            self.wait(1)
+            pause()
             self.play(Create(framebox1))
-            self.wait(1)
+            pause()
             self.play(Uncreate(framebox1))
             self.play(
                 Write(arrow21),
@@ -817,9 +838,9 @@ class PartielleIntegration(Scene):
                 D2_1.animate.scale(1.1).set_color(YELLOW_C),
                 I2_2.animate.scale(1.1).set_color(YELLOW_C)
             )
-            self.wait(1)
+            pause()
             self.play(Write(ex22_1[1]))
-            self.wait(1)
+            pause()
             self.play(
                 Unwrite(arrow21),
                 sign21.animate.scale(0.9).set_color(WHITE),
@@ -831,18 +852,18 @@ class PartielleIntegration(Scene):
                 D2_2.animate.scale(1.1).set_color(YELLOW_C),
                 I2_2.animate.scale(1.1).set_color(YELLOW_C)
             )
-            self.wait(1)
+            pause()
             self.play(Write(VGroup(ex22_1[2], ex22_1[3], ex22_1[4])))
-            self.wait(1)
+            pause()
             self.play(TransformMatchingTex(ex22_1, ex22_2))
-            self.wait(1)
+            pause()
             self.play(
                 sign22.animate.scale(0.9).set_color(WHITE),
                 D2_2.animate.scale(0.9).set_color(WHITE),
                 I2_2.animate.scale(0.9).set_color(WHITE)
             )
             self.play(Write(ex23))
-            self.wait(3)
+            pause()
             self.play(Unwrite(VGroup(ex21_2, ex22_2, ex23, DItable2)))
 
             ### 3rd stop: e^-x cos(x)
@@ -886,24 +907,24 @@ class PartielleIntegration(Scene):
 
             framebox2 = SurroundingRectangle(VGroup(sign33, D3_3, I3_3), buff = .2)
 
-            self.wait(1)
+            pause()
             self.play(Write(ex31[0]))
             self.play(Write(VGroup(D3head, I3head, sign31, sign32, sign33)))
-            self.wait(1)
+            pause()
             self.play(Write(D3_1))
-            self.wait(1)
+            pause()
             self.play(Write(I3_1))
-            self.wait(1)
+            pause()
             self.play(Write(I3_2))
-            self.wait(1)
+            pause()
             self.play(Write(I3_3))
-            self.wait(1)
+            pause()
             self.play(Write(D3_2))
-            self.wait(1)
+            pause()
             self.play(Write(D3_3))
-            self.wait(1)
+            pause()
             self.play(Create(framebox2))
-            self.wait(1)
+            pause()
             self.play(Uncreate(framebox2))
             self.play(
                 Write(arrow31),
@@ -911,9 +932,9 @@ class PartielleIntegration(Scene):
                 D3_1.animate.scale(1.1).set_color(YELLOW_C),
                 I3_2.animate.scale(1.1).set_color(YELLOW_C)
             )
-            self.wait(1)
+            pause()
             self.play(Write(ex31[1]))
-            self.wait(1)
+            pause()
             self.play(
                 Unwrite(arrow31),
                 sign31.animate.scale(0.9).set_color(WHITE),
@@ -926,9 +947,9 @@ class PartielleIntegration(Scene):
                 D3_2.animate.scale(1.1).set_color(YELLOW_C),
                 I3_3.animate.scale(1.1).set_color(YELLOW_C)
             )
-            self.wait(1)
+            pause()
             self.play(Write(ex31[2]))
-            self.wait(1)
+            pause()
             self.play(
                 Unwrite(arrow32),
                 sign32.animate.scale(0.9).set_color(WHITE),
@@ -940,24 +961,24 @@ class PartielleIntegration(Scene):
                 D3_3.animate.scale(1.1).set_color(YELLOW_C),
                 I3_3.animate.scale(1.1).set_color(YELLOW_C)
             )
-            self.wait(1)
+            pause()
             self.play(Write(ex31[3]))
-            self.wait(1)
+            pause()
             self.play(
                 sign33.animate.scale(0.9).set_color(WHITE),
                 D3_3.animate.scale(0.9).set_color(WHITE),
                 I3_3.animate.scale(0.9).set_color(WHITE)
             )
             self.play(Write(ex31l))
-            self.wait(1)
+            pause()
             self.play(Write(ex32_1))
-            self.wait(1)
+            pause()
             self.play(TransformMatchingTex(ex32_1, ex32_2))
-            self.wait(1)
+            pause()
             self.play(Write(ex32l))
-            self.wait(1)
+            pause()
             self.play(Write(ex33))
-            self.wait(3)
+            pause()
             self.play(Unwrite(VGroup(ex31, ex31l, ex32_2, ex32l, ex33, DItable3)))
             
             ### why does it work?
@@ -992,27 +1013,29 @@ class PartielleIntegration(Scene):
 
             arroww1 = Arrow(start= Dw_1.get_center(), end=Iw_2.get_center(), buff=0.55)#.shift(LEFT*0.1)
 
-            self.wait(1)
+            pause()
 
             self.play(Write(formula))
             self.play(Create(dividerline))
             self.play(Write(VGroup(Dwhead, Iwhead, signw1, signw2, signw3)))
-            self.wait(1)
+            pause()
             self.play(Write(VGroup(Dw_1, Iw_1)))
+            pause()
             self.play(
                 Dw_1.animate.set_color(RED_C),
                 Iw_1.animate.set_color(RED_C),
                 formula[0][1:4].animate.set_color(RED_C)
             )
-            self.wait(1)
+            pause()
             self.play(Write(VGroup(Dw_2, Iw_2)))
-            self.wait(1)
+            pause()
             self.play(Write(arroww1))
+            pause()
             self.play(
                 arroww1.animate.set_color(GREEN_C),
                 formula[0][7:9].animate.set_color(GREEN_C)
             )
-            self.wait(1)
+            pause()
             self.play(
                 Dw_2.animate.set_color(YELLOW_E),
                 Iw_2.animate.set_color(YELLOW_E),
@@ -1023,10 +1046,10 @@ class PartielleIntegration(Scene):
             formula2[0][1:4].set_color(YELLOW_E)
             formula2.move_to(formula, aligned_edge=LEFT)
 
-            self.wait(1)
+            pause()
             self.play(FadeOut(formula[0]))
             self.play(TransformMatchingShapes(formula[1], formula2))
-            self.wait(1)
+            pause()
 
             formula3 = MathTex(r"\int uv' \,dx", r"= uv - \int u'v \,dx")
             formula3.to_corner(UP).shift(DOWN)
@@ -1035,23 +1058,79 @@ class PartielleIntegration(Scene):
             formula3[1][5:8].set_color(YELLOW_E)
 
             self.play(TransformMatchingShapes(formula2, formula3[0]))
-            self.wait(1)
+            pause()
             self.play(VGroup(Dw_1, Iw_1, Dw_2, Iw_2, arroww1).animate.shift(DOWN*0.94))
-            self.wait(1)
+            pause()
             self.play(Write(formula3[1]))
-            self.wait(3)
+            pause()
             self.play(Unwrite(VGroup(title, formula3, Dwhead, Iwhead, signw1, signw2, signw3, Dw_1, Iw_1, Dw_2, Iw_2, arroww1)), Uncreate(dividerline))
-            self.wait(1)
+            pause()
+
+            
+        def ibpbounds():
+            title = Text(
+                "Was bei einem bestimmten Integral?",
+                font="Roboto Medium", 
+                font_size=55
+            )
+
+            self.play(Write(title))
+            self.play(title.animate.scale(0.7).to_corner(UP + LEFT))
+
+            formula = MathTex(r"\int_a^b uv' \, dx =", r"\left[uv\right]_a^b - \int_a^b u'v \, dx", font_size= 50)
+
+            question = MathTex(r"\int_a^b uv' \, dx =", r"\; ?", font_size= 50)
+            question.move_to(formula, aligned_edge=LEFT)
+            pause()
+            self.play(Write(question))
+            pause()
+            self.play(Unwrite(question[1]))
+            self.play(Write(formula[1]))
+            pause()
+            self.play(Unwrite(VGroup(title, question[0], formula[1])))
+            pause()
+
+        def end():
+            thanks = Text(
+                "Danke für eure Aufmerksamkeit!",
+                font="Roboto Medium", 
+                font_size=55
+            )
+
+            title = Text(
+                "Quellen",
+                font="Roboto Medium", 
+                font_size=55
+            )
+
+            self.play(Write(thanks))
+            pause()
+            self.play(Unwrite(thanks))
+            self.play(Write(title))
+            self.play(title.animate.scale(0.7).to_corner(UP + LEFT))
+            source1 = Tex("https://de.wikipedia.org/wiki/Partielle\_Integration", font_size=30)
+            source2 = Tex("https://docs.editor.manim.community/", font_size=30)
+            source3 = Tex("https://docs.manim.community/", font_size=30)
+            source4 = Tex("https://en.wikipedia.org/wiki/Integration\_by\_parts", font_size=30)
+            source5 = Tex("https://www.mathe-online.at/mathint/lexikon/i.html", font_size=30)
+            source6 = Tex("https://youtu.be/2I-\_SV8cwsw", font_size=30)
+            source7 = Tex("https://youtu.be/7t4xB6XZvJo", font_size=30)
+            source8 = Tex("https://youtu.be/fikL-JSRB4U", font_size=30)
+            source9 = Tex("https://youtu.be/I\_1haFAXr\_Y", font_size=30)
+
+            sources = VGroup(source1, source2, source3, source4, source5, source6, source7, source8, source9).arrange(DOWN,buff=0.3, aligned_edge= LEFT).to_corner(LEFT)
+            self.play(Write(sources))
+            self.wait(0.1)
 
             
 
-            
 
-
-        # titlepage()
-        # topics()
-        # indefiniteIntegral()
-        # integralproductrule()
-        # examples()
-        # phoenix()
+        titlepage()
+        topics()
+        indefiniteIntegral()
+        integralproductrule()
+        examples()
+        phoenix()
         dimethod()
+        ibpbounds()
+        end()
