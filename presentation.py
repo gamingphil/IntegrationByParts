@@ -431,26 +431,26 @@ class PartielleIntegration(Scene):
 
 
             ex2_1 = MathTex(r"\int x^2 e^x \, dx")
-            ex2_2 = MathTex(r"= x^2 e^x-", r"\int \frac{1}{2}x e^x \, dx")
-            ex2_3 = MathTex(r"= x^2 e^x- \left(", r"\frac{1}{2}x e^x", r"-\int \frac{1}{2}e^x \, dx \right)")
-            ex2_4 = MathTex(r"= x^2 e^x", r"- \left( \frac{1}{2}x e^x", r"- \frac{1}{2}e^x \right)")
-            ex2_5 = MathTex(r"=", r"x^2", r"e^x", r"- \frac{1}{2}x", r"e^x", r"+ \frac{1}{2}", r"e^x", r"+ c")
-            ex2_6 = MathTex(r"=", r"e^x", r"\left(", r"x^2", r"- \frac{1}{2}x", r"+ \frac{1}{2}", r"\right)", r"+ c")
+            ex2_2 = MathTex(r"= x^2 e^x-", r"\int 2x e^x \, dx")
+            ex2_3 = MathTex(r"= x^2 e^x- \left(", r"2x e^x", r"-\int 2e^x \, dx \right)")
+            ex2_4 = MathTex(r"= x^2 e^x", r"- \left( 2x e^x", r"- 2 e^x \right)")
+            ex2_5 = MathTex(r"=", r"x^2", r"e^x", r"- 2x", r"e^x", r"+ 2", r"e^x", r"+ c")
+            ex2_6 = MathTex(r"=", r"e^x", r"\left(", r"x^2", r"- 2x", r"+ 2", r"\right)", r"+ c")
 
             ex2 = VGroup(ex2_1, ex2_2, ex2_3, ex2_4, ex2_5).arrange(DOWN).set_x(0).arrange(DOWN, buff=0.4, aligned_edge=LEFT).scale(0.85).to_corner(LEFT).shift(DOWN*0.3)
             ex2_6.scale(0.85).move_to(ex2_5, aligned_edge=LEFT)
 
 
             ex2part1 = MathTex(r"u=", r"x^2")
-            ex2part2 = MathTex(r"u'=", r"\frac{1}{2}x")
+            ex2part2 = MathTex(r"u'=", r"2x")
             ex2part3 = MathTex(r"v=", r"e^x")
             ex2part4 = MathTex(r"v'=", r"e^x")
 
             ex2parts = VGroup(ex2part1, ex2part2, ex2part3, ex2part4)
             ex2parts.arrange_in_grid(cols=2, buff=0.5, col_alignments="ll",col_widths=None).to_corner(RIGHT).shift(LEFT*0.5)
 
-            ex2_2part1 = MathTex(r"u=", r"\frac{1}{2}x")
-            ex2_2part2 = MathTex(r"u'=", r"\frac{1}{2}")
+            ex2_2part1 = MathTex(r"u=", r"2x")
+            ex2_2part2 = MathTex(r"u'=", r"2")
             ex2_2part3 = MathTex(r"v=", r"e^x")
             ex2_2part4 = MathTex(r"v'=", r"e^x")
 
